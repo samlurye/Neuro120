@@ -18,7 +18,10 @@ Iapp = @(t) (t>10 & t < 12)*10 + (t>10+t_sep & t < 12+t_sep)*10;
 % Step down from 10 to 8 microA at t=100
 %Iapp = @(t) (t>0 & t < 100)*10 + 8*(t>100);
 
-% Sinusoid plus constant amplitude 
+% Turn off from 10 to 0 microA at t=100
+%Iapp = @(t) (t>0 & t < 100)*10;
+
+% Sinusoid plus constant amplitude
 %I0 = 0;
 %I1 = 7;
 %hz = 50;
@@ -54,10 +57,10 @@ v = theta(:,1);
 tspike = t(v(1:end-1) <= vthresh & v(2:end) > vthresh);
 tspike(tspike < t_thresh) = []; % Throw away spikes occuring before t_thresh ms
 if isempty(tspike) % Handle zero firing rate
-   tspike = [0 inf]; 
+   tspike = [0 inf];
 end
 for ts = tspike
-    vline(ts) 
+    vline(ts)
 end
 
 fr = 1000/median(diff(tspike));

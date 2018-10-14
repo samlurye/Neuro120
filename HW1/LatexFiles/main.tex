@@ -79,8 +79,76 @@ Shortly after the input current is applied, the sodium channel gating variable $
 
 \begin{figure}
     \centering
-    \includegraphics{const_current_firing_rate.png}
+    \includegraphics[scale=0.5]{const_current_firing_rate.png}
     \label{fig:const_current}
+\end{figure}
+
+\section*{Problem 4}
+
+\textbf{(a)} Two spikes are fired in response to two pulses separated by 12ms.
+\\\\
+
+\textbf{(b)} A single spike is fired in response to two pulses separated by 3ms.
+\\\\
+
+\textbf{(c)} For the pulses separated by 3ms, the second pulse occurs at 13 ms just as the sodium channel inactivation variable $h$ is approaching its lowest values, indicating that sodium channels are at the greatest probability of being inactivated. The neuron is thus in the refractory period, which prevents the cell from firing another spike. Since the pulse only lasts 2 ms, the current returns to normal by the time the cell can support another action potential.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{gating3ms.png}
+    \label{fig:gating3ms}
+\end{figure}
+
+For the pulses with 12ms separation, the second pulse occurs at 22 ms when all gating variables $m,n,h$ have returned to their default values. This indicates that the neuron is at rest and capable of firing, so the second pulse causes a spike.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{gating12ms.png}
+    \label{fig:gating12ms}
+\end{figure}
+
+
+\section*{Problem 5}
+\textbf{(a)} The firing rate after the rise to 8 $\mu A$ is 62.4257 Hz.
+\\\\
+\textbf{(b)} The firing rate after the drop to 8 $\mu A$ is 0 Hz.
+\\\\
+\textbf{(c)} The firing rate is 0 Hz for higher currents--the firing rate in 3a is only 0 Hz for currents less than 6 $\mu A$, while the rate is 0 Hz here for currents up to 8 $\mu A$. This is an example of how history affects spikes, by changing the state of the gating variables at the time of of pulse.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{history_firing_rate.png}
+    \label{fig:history_rate}
+\end{figure}
+
+\textbf{(d)} The initial spike is stronger because the gating variables begin at $m$ = 0.0529, $n$ = 0.3177, $h$=0.5961, but since the current remains at 10 $\mu A$, the neuron continues fire immediately after exiting the refractory period and before the gating variables can fully return to their default state. Specifically, at each subsequent spike, the sodium channel inactivation variable is lower than its default state and the potassium channel activation variable is slightly higher, so repolarization occurs earlier.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.75]{history_dependence.png}
+    \label{fig:history}
+\end{figure}
+
+The slight activity at 100 ms isn't a spike because the current is turned off before threshold voltage for a spike is reached.
+
+\section*{Problem 6}
+\textbf{(a)} The firing rate for $\omega = 2\pi\frac{50}{1000}$ is 50.0156 Hz. As seen in the figure below, the firing rate has a complex relationship with $\omega$:
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{omega.png}
+    \label{fig:omega}
+\end{figure}
+
+\textbf{(b)}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{i0_firing_curve.png}
+    \label{fig:i0_curve}
+\end{figure}
+
+\textbf{(c)} $I_0$ has no effect on the firing rate in this range.
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.5]{i0_range.png}
+    \label{fig:i0_range}
 \end{figure}
 
 \end{document}
