@@ -171,6 +171,123 @@ The neuron's peak response would be higher to a brief tone pip. The STA shows th
     \label{fig:my_label}
 \end{figure}
 
-The best model size depends on whether we use regularization or not. The odd spiking behavior in Figure 10 is a result of the randomness of $H$. When $\lambda=0$, $HH^\top$ is non-invertible with high probability and so the network exhibits unpredictable performance. Based on Figure 10, it would appear that the best model size is around 6. In Figure 11, we added a very small amount of regularization just to ensure that our solution could use a true inverse rather than a pseudoinverse. As expected, the regularization drastically lowers the variability of the performance of the network, with the average MSE monotonically decreasing as $N_h$ varies from 1 to 40. From Figure 11, we would determine that the best model size is $N_h=40$. Also as expected, a smaller model is less expressive and therefore cannot fully capture the variance in the data, as seen in the high test error for low values of $N_h$ in Figure 11. This model does not overfit for any value of $N_h$ between 1 and 40, as we can see by the nearly 0 test error for $N_h=40$. In general, though, a model that is too big may overfit. 
+The best model size depends on whether we use regularization or not. The odd spiking behavior in Figure 10 is a result of the randomness of $H$. When $\lambda=0$, $HH^\top$ is non-invertible with high probability and so the network exhibits unpredictable performance. Based on Figure 10, it would appear that the best model size is around 6. In Figure 11, we added a very small amount of regularization just to ensure that our solution could use a true inverse rather than a pseudoinverse. As expected, the regularization drastically lowers the variability of the performance of the network, with the average MSE monotonically decreasing as $N_h$ varies from 1 to 40. From Figure 11, we would determine that the best model size is $N_h=40$. Also as expected, a smaller model is less expressive and therefore cannot fully capture the variance in the data, as seen in the high test error for low values of $N_h$ in Figure 11. This model does not overfit for any value of $N_h$ between 1 and 40, as we can see by the nearly 0 test error for $N_h=40$. In general, though, a model that is too big may overfit.
+
+\subsection*{2c}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.65\linewidth]{problem2c.png}
+    \caption{Average MSE (500 trials) for $N_h=40$ to $N_h=500$, $\lambda=0.$}
+    \label{fig:my_label}
+\end{figure}
+
+Except for 4 large spikes between $N_h$=40 and $N_h$=75, the average MSE tended to be very low. The average MSE was close to 0 between $N_h$=75 and $N_h$=100, and was consistently virtually 0 for all $N_h\geq$125, so there's very little variability in MSE for very large $N_h$ relative to smaller $N_h$. It therefore seems like the best model size is at least 125, since models of that size or greater produced consistently low MSEs.
+
+\subsection*{2d}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{problem2dwnoise.png}
+    \caption{Predictions for model with label noise ($\epsilon=0.2$, $N_h=500$, $\lambda=0.$)}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{problem2dnonoise.png}
+    \caption{Predictions for model without label noise ($\epsilon=0$, $N_h=500$, $\lambda=0.$)}
+    \label{fig:my_label}
+\end{figure}
+
+The model with label noise yieled an average MSE = 0.409, while the model without label noise yielded an average MSE = $4.7605e^{-6}$. While the predictions without label noise seem to match the data perfectly, the predictions with label noise overfit the noisy data and produced a poor-looking curve.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{problem2dlwnoise.png}
+    \caption{Predictions for model with label noise and regularization ($\epsilon=0.2$, $N_h=500$, $\lambda\approx1e^{-4}.$)}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{problem2dlnonoise.png}
+    \caption{Predictions for model with regularization and no label noise ($\epsilon=0$, $N_h=500$, $\lambda\approx1e^{-4}.$)}
+    \label{fig:my_label}
+\end{figure}
+
+The model with regularization and label noise yielded an average MSE = 0.1959 and the model with regularization without label noise yielded an average MSE = 0.1944; thus, the regularization made the error more consistent in spite of noise.
+
+\subsection*{2e}
+
+Based on these results, it doesn't really make sense for neural networks to massively expand the dimension of their inputs. Since we live in an imperfect world, the data received by the brain is inevitably noisy, so label noise seems appropriate in order to model the brain.
+
+\section*{Problem 3}
+
+\subsection*{3a}
+
+See the attached code for (i) and (ii)
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{problem3aiii.png}
+    \caption{Scatterplot of toWhiten with principle components overlaid}
+    \label{fig:my_label}
+\end{figure}
+
+The dimension of the covariance matrix is $D\times D$. The diagonalization ran more quickly for 5000x1000 than 1000x5000 matrices, and diagonalization was faster than SVD.
+
+\subsection*{3b}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{problem3b.png}
+    \caption{Scatterplot of the whitened data}
+    \label{fig:my_label}
+\end{figure}
+
+The first principle component of the whitened data is the same as the first principle component of the unwhitened data.
+
+\subsection*{3c}
+
+Mixed images
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{image1.png}
+    \includegraphics[width=0.3\linewidth]{image2.png}
+    \includegraphics[width=0.3\linewidth]{image3.png}
+    \label{fig:my_label}
+\end{figure}
+
+Whitened images
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{whitened1.png}
+    \includegraphics[width=0.3\linewidth]{whitened2.png}
+    \includegraphics[width=0.3\linewidth]{whitened3.png}
+    \label{fig:my_label}
+\end{figure}
+
+ICA (unwhitened)
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{uw_ica1.png}
+    \includegraphics[width=0.3\linewidth]{uw_ica2.png}
+    \includegraphics[width=0.3\linewidth]{uw_ica3.png}
+    \label{fig:my_label}
+\end{figure}
+
+ICA (whitened)
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\linewidth]{ica1.png}
+    \includegraphics[width=0.3\linewidth]{ica2.png}
+    \includegraphics[width=0.3\linewidth]{ica3.png}
+    \label{fig:my_label}
+\end{figure}
 
 \end{document}
