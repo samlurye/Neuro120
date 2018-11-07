@@ -1,24 +1,25 @@
 clear all
 
-Nhs = 1:40;
-errors = zeros(40, 2000);
-for nh = Nhs
-    for i = 1:2000
-        errors(nh, i) = run_nn(nh, false);
+Nhs = 500;
+errors = zeros(1, 500);
+% for nh = Nhs
+    for i = 1:500
+        errors(1, i) = run_nn(500, false);
     end
-end
+% end
 
+mean(errors,2)
 plot(Nhs, mean(errors, 2));
 xlabel("N_h");
-ylabel("Average MSE (2000 Trials)");
+ylabel("Average MSE (500 Trials)");
 
 function mean_squared_error = run_nn(Nh, make_plots)
 
 %% Set up parameters
 N = 40; % Number of training samples
-epsilon = 0.0; % Amount of label noise
+epsilon = 0; % Amount of label noise
 Nh = Nh;
-lambda = 0.000001;
+lambda = exp(-4);
 
 %% Make dataset
 target_fn = @(t) sin(t);
@@ -49,7 +50,7 @@ w = y * h' * pinv(h * h' + lambda * eye(Nh));
 y_pred = w*h_test;
 % the distribution code was calculating the total squared error
 % rather than the mean squared error
-mean_squared_error = norm(y_test-y_pred).^2 / length(y_test);
+mean_squared_error = norm(y_test-y_pred).^2 / Ntest;
 
 if make_plots
     plot(x,y,'ob')

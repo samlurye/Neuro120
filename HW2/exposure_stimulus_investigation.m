@@ -3,6 +3,11 @@ clear all
 load exposure_stimulus_experiment.mat
 
 stimulus_start_times = 0:1/6:(60-1/6); % In seconds
+clear all
+
+load exposure_stimulus_experiment.mat
+
+stimulus_start_times = 0:1/6:(60-1/6); % In seconds
 stim_assignments = discretize(spikes_single_unit, 0:1/6:60);
 responses = [];
 for i = 1:360
@@ -28,7 +33,7 @@ gauss = @(dt, sigma) 1 / sqrt(2 * pi * sigma ^ 2) * exp(-(dt .^ 2) / (2 * sigma 
 
 avg_firing_rates = zeros(3, length(0:0.001:1/6));
 sigmas = [0.005 0.05 0.0005];
-spikes = reshape(responses, 1, []); 
+spikes = reshape(responses, 1, []);
 spikes = spikes(spikes ~= 0);
 for j = 1:length(sigmas)
     avg_firing_rates(j, :) = avg_firing_rates(j, :) + firing_rates(spikes, gauss, sigmas(j));
@@ -83,5 +88,3 @@ for i = 1:length(spikes)
 end
 
 end
-        
-        
