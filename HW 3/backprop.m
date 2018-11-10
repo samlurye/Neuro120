@@ -39,12 +39,13 @@ for i = 1:max_itr
     % Compute forward propagation for train and test data
     
     % Train data
-    h1 = % ???
-    h2 = % ???
-    yh = % ???
+    f = @(u) max(u, 0);
+    h1 = f(W1*X_train);
+    h2 = f(W2*h1);
+    yh = W3*h2;
     
     % Test data
-    yh_test = % ???
+    yh_test = W3*f(W2*f(W1*X_test));
     
     % Compute losses and accuracy on train and test data
     L(i) = 1/2*norm(y_train-yh,'fro')^2;
@@ -55,21 +56,22 @@ for i = 1:max_itr
     acc_test(i) = mean(sign(yh_test)==sign(y_test));
     
     % Compute backprop (just on training data)
-    e = % ???
-
-    d3 = % ???
-    d2 = % ???
-    d1 = % ???
+    e = y_train-yh;
+    
+    step = @(u) min(f(u), 1);
+    d3 = e;
+    d2 = (W3'*d3).*step(h2);
+    d1 = (W2'*d2).*step(h1);
 
     % Compute gradient
-    g3 = % ???
-    g2 = % ???
-    g1 = % ???
+    g3 = -d3*h2';
+    g2 = -d2*h1';
+    g1 = -d1*X_train';
 
     % Update weights
-    W3 = % ???
-    W2 = % ???
-    W1 = % ???
+    W3 = W3+alpha*g3;
+    W2 = W2+alpha*g2;
+    W1 = W1+alpha*g1;
 end
 
 % Plot the learning trajectory
@@ -84,4 +86,3 @@ ylabel('MSE')
 subplot(122)
 plot(t,acc,t,acc_test,'linewidth',2)
 legend('Train accuracy','Test accuracy')
-

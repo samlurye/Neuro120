@@ -86,31 +86,60 @@ im_num = 41; % German shephard
 im = images(:,:,:,im_num);
 
 layers = {'data','conv1','pool1','conv5','pool5','fc7','prob'};
+rotations = linspace(0, 180, 30);
+corrs = zeros(length(layers), length(rotations));
 
-% Your code here!
+for l = 1:7
+    for t = 1:30
+        im_r = imrotate(im, rotations(t), 'crop');
+        a0 = activations(net, im, char(layers(l)), 'OutputAs', 'columns');
+        a1 = activations(net, im_r, char(layers(l)), 'OutputAs', 'columns');
+        corrs(l, t) = corr(a0, a1);
+    end
+end
+
+figure();
+
+plot(rotations, corrs, 'linewidth', 2);
+legend(layers);
 
 %% Test correlation between AlexNet RDMs and neural RDMs
 clear c h
 
 layers={'data','conv1','pool1','pool2','relu3','relu4','relu5','pool5','fc6','fc7','fc8'};
+R = zeros(92,92,length(layers));
+corrs = zeros(1, 11, 2);
 
-figure();
+for l = 1:length(layers)
+    F = zeros(length(activations(net, im, char(layers(l)), 'OutputAs', 'columns')),1);
+    for im_num = 1:92
+        im = images(:,:,:,im_num);
+        F(:,im_num) = activations(net, im, char(layers(l)), 'OutputAs', 'columns');
+    end
+    
+    d = 1-corr(F); % Compute AlexNet RDM at a specific layer
+    R(:,:,l) = d;
+    
+    corrs(1, l, 1) = corr(d(:), RDM1(:));
+    corrs(1, l, 2) = corr(d(:), RDM2(:));
+    
+    figure()
+    subplot(131)
+    imagesc(d)
+    caxis([0 1])
+    axis square
 
-%d = % Compute AlexNet RDM at a specific layer
-subplot(131)
-imagesc(d)
-caxis([0 1])
-axis square
+    d_data = RDM1; % Plot experimental RDM
+    subplot(132)
+    imagesc(d_data)
+    caxis([0 1])
+    axis square
+    title(char(layers(l)))
 
-d_data = RDM1; % Plot experimental RDM
-subplot(132)
-imagesc(d_data)
-caxis([0 1])
-axis square
-
-subplot(133) % Plot correlation
-plot(d(:),d_data(:),'.')
-xlim([0 1.5])
-ylim([0 1.5])
-axis square
+    subplot(133) % Plot correlation
+    plot(d(:),d_data(:),'.')
+    xlim([0 1.5])
+    ylim([0 1.5])
+    axis square
+end
 

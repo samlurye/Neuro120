@@ -164,4 +164,105 @@ The network does correctly classify the image.
     \label{fig:my_label}
 \end{figure}
 
+\subsection*{2d}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2D_2.png}
+    \caption{The correlation for most layers reduced to less than 0.5 within 40-50 degrees, so AlexNet seems to begin to misclassify at around 50 degrees of rotation. While the \texttt{prob} layer showed higher invariance to translation than rotation, the rest of the layers seem generally more invariant to rotation. The correlations dipped below 0.2 for most layers within 60 pixels of translation, while the rotation correlations have a wider distribution between 0 and 0.5, so it seems that AlexNet is more resistant to rotation.}
+    \label{fig:my_label}
+\end{figure}
+
+\subsection*{2e}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2E_RDMdata.png}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2E_RDMconv1.png}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2E_RDMpool1.png}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2E_RDMpool2.png}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2E_RDMrelu3.png}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2E_RDMrelu4.png}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2E_RDMrelu5.png}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2E_RDMpool5.png}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2E_RDMfc6.png}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2E_RDMfc7.png}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2E_RDMfc8.png}
+    \label{fig:my_label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem2E_RDMcorrelations.png}
+    \label{fig:my_label}
+    \caption{The RDMs in intermediate layers of AlexNet are generally more similar to the experimental RDMs than the raw data. The layer of AlexNet that best matches the experimental RDMS is the relu5 layer, followed closely by pool5.}
+\end{figure}
+
+\section*{Problem 3}
+\subsection*{3a}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem3A_2.png}
+    \label{fig:my_label}
+\end{figure}
+
+\subsection*{3b}
+The accuracy stayed around 0.5 for the first 1500 iterations, before suddenly spiking to 0.95 and gradually increasing for subsequent iterations. There may be minimal overfitting since a positive difference between the accuracy of the training and test data develops after 2000 trials. The test accuracy doesn't seem to decrease after a certain iteration, so it doesn't seem like stopping earlier would help the accuracy.
+
+\subsection*{3c}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{problem3C.png}
+    \caption{The accuracy now spikes towards 1 far more quickly and the final accuracy is closer to 1. Stopping early would not significantly improve the accuracy, since it hovers at the same level after the 2500th iteration. Based on this, a larger weight variance seems better for the purpose of generalization.}
+    \label{fig:my_label}
+\end{figure}
+
 \end{document}
