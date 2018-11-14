@@ -63,6 +63,9 @@ disp('Done')
 
 %% Implement Hopfield net update
 
+% This logical expression returns a binary vector with a 1 at index i if
+% and only if the i'th index of Wh-0.5 is greater than or equal to 0. This
+% is precisely the nonlinearity described in the Hopfield net update.
 hopfield_update = @(h) (W * h - 0.5) >= 0;
 
 %% Run a probe: give it a question, and see if it fills in the answer
